@@ -2,8 +2,6 @@
 import createRoute from './router'
 const router = createRoute()
 console.log(router)
-console.log(aaa)
-console.log(fuck)
 </script>
 
 <template>
