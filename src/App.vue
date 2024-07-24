@@ -1,13 +1,10 @@
-<script setup>
-import createRoute from './router'
-const router = createRoute()
-console.log(router)
-</script>
+<script setup></script>
 
 <template>
   <div>
     我是App
-    <table></table>
+    <el-button>你好</el-button>
+    <router-view></router-view>
   </div>
 </template>
 
