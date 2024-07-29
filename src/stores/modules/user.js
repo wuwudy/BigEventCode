@@ -6,8 +6,8 @@ export const useUserStore = defineStore(
   () => {
     const token = ref('')
     //设置token
-    const setToken = (token) => {
-      token.value = token
+    const setToken = (newToken) => {
+      token.value = newToken
     }
     //移除token
     const removeToken = () => {
@@ -19,5 +19,10 @@ export const useUserStore = defineStore(
       removeToken
     }
   },
-  { persist: true }
+  {
+    persist: {
+      key: 'BE',
+      debug: true
+    }
+  }
 )
