@@ -151,8 +151,6 @@ const handleCommand = (command) => {
       }
     }
   }
-  .main {
-  }
   .footer {
     height: 40px;
     text-align: center;
