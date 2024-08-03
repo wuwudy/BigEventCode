@@ -1,9 +1,32 @@
 import { defineStore } from 'pinia'
 import { ref } from 'vue'
+import { getUserInfo, updateUserProfile } from '@/api/user'
 
 export const useUserStore = defineStore(
   'user',
   () => {
+    //用户信息
+    const userInfo = ref({})
+
+    //调用接口设置个人信息
+    const setUserInfo = async () => {
+      const { data } = await getUserInfo()
+      userInfo.value = data
+    }
+
+    //更新个人信息
+    const updateUserInfo = async (newUserInfo) => {
+      await updateUserProfile(newUserInfo)
+      //刷新userInfo值
+      setUserInfo()
+    }
+
+    //移除个人信息
+    const removeUserInfo = () => {
+      userInfo.value = {}
+    }
+
+    //token
     const token = ref('')
     //设置token
     const setToken = (newToken) => {
@@ -16,7 +39,11 @@ export const useUserStore = defineStore(
     return {
       token,
       setToken,
-      removeToken
+      removeToken,
+      userInfo,
+      setUserInfo,
+      updateUserInfo,
+      removeUserInfo
     }
   },
   {

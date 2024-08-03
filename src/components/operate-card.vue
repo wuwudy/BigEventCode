@@ -3,9 +3,7 @@
     <template #header>
       <div class="card-header">
         <span>{{ props.title }} </span>
-        <button>
-          <slot name="buttontext"></slot>
-        </button>
+        <slot name="button"></slot>
       </div>
     </template>
     <slot></slot>
@@ -20,19 +18,14 @@ const props = defineProps({
 
 <style lang="scss" scoped>
 .card {
+  box-sizing: border-box;
   width: 100%;
+  overflow: visible;
   .card-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
     font-size: 16px;
-    button {
-      height: 30px;
-      border: 0px;
-      border-radius: 5px;
-      background-color: #409eff;
-      color: #fff;
-    }
   }
 }
 </style>

@@ -3,9 +3,11 @@ import { useUserStore } from '@/stores'
 // import { ElMessage } from 'element-plus'
 import router from '@/router'
 
+export const baseURL = 'http://big-event-vue-api-t.itheima.net'
+
 // 创建实例时配置默认值
 const instance = axios.create({
-  baseURL: 'http://big-event-vue-api-t.itheima.net',
+  baseURL: baseURL,
   timeout: 10000
 })
 

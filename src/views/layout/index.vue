@@ -46,11 +46,14 @@
         <el-header class="header">
           <div class="left-nickname">
             <span>黑马程序员 : </span>
-            <span class="nickname">NICKNAME</span>
+            <span class="nickname">{{
+              userStore.userInfo.nickname ? userStore.userInfo.nickname : '未设置昵称'
+            }}</span>
           </div>
           <el-dropdown @command="handleCommand">
             <div class="right-avatar">
-              <img src="@/assets/default.png" />
+              <img v-if="userStore.userInfo.user_pic" :src="userStore.userInfo.user_pic" />
+              <img v-else src="@/assets/default.png" />
               <el-icon><CaretBottom /></el-icon>
             </div>
             <template #dropdown>
@@ -103,11 +106,22 @@ import { useRouter } from 'vue-router'
 const userStore = useUserStore()
 const router = useRouter()
 
+//获取基本信息
+const getInfo = async () => {
+  //有userInfo不需要发请求
+  if (userStore.userInfo) {
+    return
+  }
+  await userStore.setUserInfo()
+  console.log(userStore.userInfo)
+}
+
 const handleCommand = (command) => {
   //如果是退出
   if (command === 'logout') {
     //清空本地数据
     userStore.removeToken()
+    userStore.removeUserInfo()
     setTimeout(() => {
       ElMessage.success('已退出！')
     }, 1000)
@@ -117,6 +131,8 @@ const handleCommand = (command) => {
   const preUrlStr = '/user/'
   router.push(preUrlStr + command)
 }
+
+getInfo()
 </script>
 
 <style lang="scss" scoped>
@@ -146,12 +162,15 @@ const handleCommand = (command) => {
       display: flex;
       align-items: center;
       img {
-        height: 30px;
+        width: 40px;
+        height: 40px;
         margin-right: 5px;
+        border-radius: 20px;
       }
     }
   }
   .footer {
+    margin-top: 10px;
     height: 40px;
     text-align: center;
     font-size: 12px;

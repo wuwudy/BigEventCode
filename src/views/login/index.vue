@@ -1,4 +1,4 @@
-<!--  -->
+<!-- 登录注册页  -->
 <template>
   <el-row class="login">
     <el-col :span="12" class="loginBg"> </el-col>
